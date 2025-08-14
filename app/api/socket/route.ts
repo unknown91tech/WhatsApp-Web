@@ -1,13 +1,14 @@
 
-import { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { Server } from 'socket.io';
 import { SOCKET_EVENTS } from '@/lib/constants';
 
 declare global {
+  // eslint-disable-next-line no-var
   var io: Server | undefined;
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   if (!global.io) {
     console.log('Initializing Socket.IO server...');
     
@@ -23,19 +24,19 @@ export async function GET(request: NextRequest) {
     global.io.on('connection', (socket) => {
       console.log('Client connected:', socket.id);
 
-      socket.on(SOCKET_EVENTS.NEW_MESSAGE, (message) => {
+      socket.on(SOCKET_EVENTS.NEW_MESSAGE, (message: unknown) => {
         // Broadcast new message to all clients
         socket.broadcast.emit(SOCKET_EVENTS.NEW_MESSAGE, message);
-        console.log('Message broadcasted:', message.id);
+        console.log('Message broadcasted:', message);
       });
 
-      socket.on(SOCKET_EVENTS.MESSAGE_STATUS_UPDATE, (statusUpdate) => {
+      socket.on(SOCKET_EVENTS.MESSAGE_STATUS_UPDATE, (statusUpdate: unknown) => {
         // Broadcast status update to all clients
         socket.broadcast.emit(SOCKET_EVENTS.MESSAGE_STATUS_UPDATE, statusUpdate);
         console.log('Status update broadcasted:', statusUpdate);
       });
 
-      socket.on(SOCKET_EVENTS.USER_TYPING, (typingData) => {
+      socket.on(SOCKET_EVENTS.USER_TYPING, (typingData: unknown) => {
         // Broadcast typing indicator to other clients
         socket.broadcast.emit(SOCKET_EVENTS.USER_TYPING, typingData);
       });
@@ -46,5 +47,5 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  return new Response('Socket.IO server initialized', { status: 200 });
+  return NextResponse.json({ message: 'Socket.IO server initialized' });
 }

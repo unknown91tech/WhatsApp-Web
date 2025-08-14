@@ -1,4 +1,4 @@
-
+// components/sidebar/ConversationItem.tsx - Individual conversation item (FIXED)
 'use client';
 
 import { ConversationSummary } from '@/types/conversation';

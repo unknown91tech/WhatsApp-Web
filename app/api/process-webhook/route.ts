@@ -1,9 +1,9 @@
-
+// app/api/process-webhook/route.ts - Process webhook data (FIXED)
 import { NextRequest, NextResponse } from 'next/server';
 import { getCollection } from '@/lib/mongodb';
 import { COLLECTIONS } from '@/lib/constants';
 import { WhatsAppWebhookPayload } from '@/types/webhook';
-import { Message } from '@/types/message';
+import { ProcessedMessage } from '@/types/message';
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,12 +21,12 @@ export async function POST(request: NextRequest) {
             for (const message of messages) {
               const contact = contacts?.find(c => c.wa_id === message.from);
               
-              const processedMessage: Message = {
+              const processedMessage: ProcessedMessage = {
                 id: message.id,
                 from: message.from,
                 to: change.value.metadata.display_phone_number,
                 text: message.text,
-                type: message.type as any,
+                type: message.type as 'text' | 'image' | 'document' | 'audio' | 'video',
                 timestamp: message.timestamp,
                 status: 'delivered',
                 isOutgoing: false,

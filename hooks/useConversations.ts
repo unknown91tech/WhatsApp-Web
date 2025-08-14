@@ -49,7 +49,7 @@ export function useConversations() {
   }, [fetchConversations]);
 
   useEffect(() => {
-    onConversationUpdate((conversation: ConversationSummary) => {
+    onConversationUpdate((conversation: any) => {
       updateConversation(conversation);
     });
   }, [onConversationUpdate, updateConversation]);

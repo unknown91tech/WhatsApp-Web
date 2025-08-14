@@ -2,7 +2,7 @@
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MoreVertical, MessageCircle, Users, Settings } from 'lucide-react';
+import { MoreVertical, MessageCircle, Users } from 'lucide-react';
 
 export function UserProfile() {
   return (

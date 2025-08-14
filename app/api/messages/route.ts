@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     const messagesCollection = await getCollection(COLLECTIONS.PROCESSED_MESSAGES);
     
-    const newMessage: Message = {
+    const newMessage: any = {
       ...message,
       createdAt: new Date(),
       updatedAt: new Date(),

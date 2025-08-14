@@ -1,4 +1,4 @@
-
+// types/message.ts - Message type definitions
 export interface Message {
   _id?: string;
   id: string;
@@ -20,6 +20,8 @@ export interface Message {
     };
     wa_id: string;
   };
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface MessageStatus {

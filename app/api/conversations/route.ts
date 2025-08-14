@@ -1,4 +1,4 @@
-
+// app/api/conversations/route.ts - Debug version with better error handling
 import { NextResponse } from 'next/server';
 import { getCollection } from '@/lib/mongodb';
 import { COLLECTIONS } from '@/lib/constants';
@@ -75,7 +75,7 @@ export async function GET() {
       count: conversations.length 
     });
 
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching conversations:', error);
     return NextResponse.json(
       { error: 'Failed to fetch conversations', details: error.message },

@@ -1,4 +1,4 @@
-
+// types/conversation.ts - Conversation type definitions
 import { Message } from './message';
 
 export interface Conversation {
@@ -21,7 +21,7 @@ export interface Conversation {
 
 export interface ConversationSummary {
   _id?: string;
-  id: string;
+  id?: string;
   wa_id: string;
   contact: {
     profile: {
@@ -35,6 +35,7 @@ export interface ConversationSummary {
     };
     timestamp: string;
     isOutgoing: boolean;
+    status?: 'sent' | 'delivered' | 'read';
   };
   lastMessageTime: Date;
   unreadCount: number;
