@@ -1,4 +1,3 @@
-
 'use client';
 
 import { ConversationSummary } from '@/types/conversation';
@@ -22,8 +21,13 @@ export function Sidebar({
 }: SidebarProps) {
   return (
     <div className={`bg-white border-r border-gray-200 flex flex-col h-full ${className}`}>
-      <UserProfile />
-      <div className="flex-1 overflow-hidden">
+      {/* User Profile Header */}
+      <div className="flex-shrink-0">
+        <UserProfile />
+      </div>
+      
+      {/* Conversations List */}
+      <div className="flex-1 overflow-hidden min-h-0">
         <ConversationList
           conversations={conversations}
           selectedConversationId={selectedConversationId}
